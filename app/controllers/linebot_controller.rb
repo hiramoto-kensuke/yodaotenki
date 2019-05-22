@@ -8,14 +8,6 @@ class LinebotController < ApplicationController
   #外部からpostを送れるようにする
   protect_from_forgery :exept => [:bot]
 
-  #MessagingAPIのリファレンスより
-  def client
-    @client ||= Line::Bot::Client.new {|config|
-      config.channel_secret = ENV["LINE_CHANNEL_SECRET"]
-      config.channel_token = ENV["LINE_CHANNEL_TOKEN"]
-    }
-  end
-
   def bot
     body = request.body.read
     signature = request.env['HTTP_X_LINE_SIGNATURE']
@@ -30,7 +22,7 @@ class LinebotController < ApplicationController
     #utf8に変換して取得(kconv)
     xml = open(url).read.toutf8
     doc = REXML::Document.new(xml)
-    #東京都 => 東京地方の情報取得
+    #東京都 -> 東京地方の情報取得
     xpath = 'weatherforecast/pref/area[4]/info'
     weather = doc.elements[xpath + '/weather'].text
     per06to12 = doc.elements[xpath + '/rainfallchance/period[2]'].text
@@ -40,13 +32,7 @@ class LinebotController < ApplicationController
 
     if per06to12 >= min_per || per12to18 >= min_per || per18to24 >= min_per
       push = "今日は傘を持つのじゃ。#{weather}じゃからの。"
-  end
-
-
-
-
-
-
+    end
 
 
     events = client.parse_events_from(body)
@@ -65,5 +51,17 @@ class LinebotController < ApplicationController
       end
     }
     head :ok
+  end
+
+
+  #MessagingAPIのリファレンスより
+
+  private
+
+  def client
+    @client ||= Line::Bot::Client.new {|config|
+      config.channel_secret = ENV["LINE_CHANNEL_SECRET"]
+      config.channel_token = ENV["LINE_CHANNEL_TOKEN"]
+    }
   end
 end

@@ -20,7 +20,7 @@ task :update_feed => :environment do
   per18to24 = doc.elements[xpath + '/rainfallchance/period[4]l'].text
   min_per = 20
   if per06to12.to_i >= min_per || per12to18.to_i >= min_per || per18to24.to_i >= min_per
-    push = "今日は傘を持っていってね！#{weather}だよ"
+    push = "今日は傘を持つのじゃ。#{weather}じゃからの。"
   else
     push = "テスト用"
   end
