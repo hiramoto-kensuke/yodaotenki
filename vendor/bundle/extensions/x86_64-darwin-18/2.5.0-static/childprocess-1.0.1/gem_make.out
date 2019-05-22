@@ -1,0 +1,5 @@
+current directory: /Users/hiramoto.kensuke/Development/portfolio/yodatenki/vendor/bundle/gems/childprocess-1.0.1/ext
+/Users/hiramoto.kensuke/.rbenv/versions/2.5.1/bin/ruby mkrf_conf.rb
+
+current directory: /Users/hiramoto.kensuke/Development/portfolio/yodatenki/vendor/bundle/gems/childprocess-1.0.1/ext
+/Users/hiramoto.kensuke/.rbenv/versions/2.5.1/bin/ruby -rrubygems /Users/hiramoto.kensuke/Development/portfolio/yodatenki/vendor/bundle/gems/rake-12.3.2/exe/rake RUBYARCHDIR=/Users/hiramoto.kensuke/Development/portfolio/yodatenki/vendor/bundle/extensions/x86_64-darwin-18/2.5.0-static/childprocess-1.0.1 RUBYLIBDIR=/Users/hiramoto.kensuke/Development/portfolio/yodatenki/vendor/bundle/extensions/x86_64-darwin-18/2.5.0-static/childprocess-1.0.1
