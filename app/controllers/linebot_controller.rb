@@ -8,7 +8,7 @@ class LinebotController < ApplicationController
   #外部からpostを送れるようにする
   protect_from_forgery :exept => [:bot]
 
-  def bot
+  def callback
     body = request.body.read
     signature = request.env['HTTP_X_LINE_SIGNATURE']
     unless client.validate_signature(body, signature)
@@ -28,7 +28,7 @@ class LinebotController < ApplicationController
     per06to12 = doc.elements[xpath + '/rainfallchance/period[2]'].text
     per12to18 = doc.elements[xpath + '/rainfallchance/period[3]'].text
     per18to24 = doc.elements[xpath + '/rainfallchance/period[4]'].text
-    min_per = 30
+    min_per = 0 #最終的には30にする?
 
     if per06to12 >= min_per || per12to18 >= min_per || per18to24 >= min_per
       push = "今日は傘を持つのじゃ。#{weather}じゃからの。"
