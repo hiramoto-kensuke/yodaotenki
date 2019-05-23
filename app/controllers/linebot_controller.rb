@@ -60,8 +60,6 @@ class LinebotController < ApplicationController
               text: push
           }
           client.reply_message(event['replyToken'], message)
-        end
-      end
     }
     head :ok
   end
