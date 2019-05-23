@@ -1,10 +1,6 @@
 class LinebotController < ApplicationController
-  require 'line/bot' # gem 'line-bot-api'
-  require 'open-uri'
-  require 'kconv'
-  require 'rexml/document'
+  require 'line/bot'
 
-# 外部からpostを送れるように
   protect_from_forgery :except => [:callback]
 
   def callback
@@ -25,6 +21,7 @@ class LinebotController < ApplicationController
         when Line::Bot::Event::MessageType::Text
           # event.message['text']：ユーザーから送られたメッセージ
           input = event.message['text']
+
           case input
             # 「明日」or「あした」というワードが含まれる場合
           when /.*(明日|あした).*/
@@ -32,24 +29,25 @@ class LinebotController < ApplicationController
 
           when /.*(テスト|てすと).*/
             push = "テストてすと"
+
           end
-          message = {
-              type: 'text',
-              text: push
-          }
-          client.reply_message(event['replyToken'], message)
         end
+        message = {
+            type: 'text',
+            text: push
         }
-        head :ok
+        client.reply_message(event['replyToken'], message)
       end
+    }
+    head :ok
+  end
 
-      private
+  private
 
-      def client
-        @client ||= Line::Bot::Client.new {|config|
-          config.channel_secret = ENV["LINE_CHANNEL_SECRET"]
-          config.channel_token = ENV["LINE_CHANNEL_TOKEN"]
-        }
-      end
+  def client
+    @client ||= Line::Bot::Client.new {|config|
+      config.channel_secret = ENV["LINE_CHANNEL_SECRET"]
+      config.channel_token = ENV["LINE_CHANNEL_TOKEN"]
+    }
   end
 end
