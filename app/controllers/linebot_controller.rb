@@ -6,16 +6,13 @@ class LinebotController < ApplicationController
   require 'rexml/document'
 
   #外部からpostを送れるようにする
-  protect_from_forgery :exept => [:bot]
+  protect_from_forgery :exept => [:callback]
 
   class LinebotController < ApplicationController
     require 'line/bot' # gem 'line-bot-api'
     require 'open-uri'
     require 'kconv'
     require 'rexml/document'
-
-    # callbackアクションのCSRFトークン認証を無効
-    protect_from_forgery :except => [:callback]
 
     def callback
       body = request.body.read
