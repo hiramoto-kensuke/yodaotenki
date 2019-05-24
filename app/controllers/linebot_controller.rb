@@ -16,7 +16,7 @@ class LinebotController < ApplicationController
       end
     end
     events = client.parse_events_from(body)
-    events.each {|event|
+    events.each { |event|
       case event
         # メッセージが送信された場合の対応（機能①）
       when Line::Bot::Event::Message
@@ -30,9 +30,8 @@ class LinebotController < ApplicationController
           xml = open(url).read.toutf8
           doc = REXML::Document.new(xml)
           xpath = 'weatherforecast/pref/area[4]/info'
-          weather = doc.elements[xpath + '/weather'].text
 
-          min_per = 0 #最終的には30に変更
+          min_per = 20 #最終的には30に変更
 
           case input
             # 「明日」or「あした」というワードが含まれる場合
@@ -42,7 +41,7 @@ class LinebotController < ApplicationController
             per18to24 = doc.elements[xpath + 'info[2]/rainfallchance/period[4]'].text
 
             if per06to12.to_i >= min_per || per12to18.to_i >= min_per || per18to24.to_i >= min_per
-              push = "明日は雨が降りそうじゃな。\nいまのところの降水確率は以下の通りじゃ。\n 6〜12時 #{per06to12}%\n 12〜18時 #{per12to18}% 18〜24時 #{per18to24}%\nパダワンよ、未来は絶えず揺れ動く。\n明日には降水確率も変わってるかもしれんな。。。"
+              push = "明日は雨が降りそうじゃな。\nいまのところの降水確率は以下の通りじゃ。\n 6〜12時 #{per06to12}%\n 12〜18時 #{per12to18}%\n 18〜24時 #{per18to24}%\nパダワンよ、未来は絶えず揺れ動く。\n明日には降水確率も変わってるかもしれんな。。。"
             else
               push = "明日の天気か？\n雨は振らないようじゃの。\nしかし、未来は絶えず揺れ動く。\n明日また尋ねるがよい。"
             end
