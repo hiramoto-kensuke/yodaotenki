@@ -31,7 +31,7 @@ class LinebotController < ApplicationController
           doc = REXML::Document.new(xml)
           xpath = 'weatherforecast/pref/area[4]/'
 
-          min_per = 0 #最終的には30に変更
+          min_per = 20 #最終的には30に変更
 
           case input
             # 「明日」or「あした」というワードが含まれる場合
@@ -41,9 +41,20 @@ class LinebotController < ApplicationController
             per18to24 = doc.elements[xpath + 'info[2]/rainfallchance/period[4]'].text
 
             if per06to12.to_i >= min_per || per12to18.to_i >= min_per || per18to24.to_i >= min_per
-              push = "明日は雨が降りそうじゃな。\nいまのところの降水確率は以下の通りじゃ。\n\n   6 〜12時 #{per06to12}%\n  12〜18時 #{per12to18}%\n  18〜24時 #{per18to24}%\n\nパダワンよ、未来は絶えず揺れ動く。\n明日には降水確率も変わってるかもしれんな。。。"
+              push = "明日は雨が降りそうじゃな。\nいまのところの降水確率は以下の通りじゃ。\n\n   6 〜12時 #{per06to12}%\n  12〜18時 #{per12to18}%\n  18〜24時 #{per18to24}%\n\nパダワンよ、未来は絶えず揺れ動く。\n明日には降水確率も変わってるかもしれんな。"
             else
               push = "明日の天気か？\n雨は振らないようじゃの。\nしかし、未来は絶えず揺れ動く。\n明日また尋ねるがよい。"
+            end
+
+          when /.*(明後日|あさって).*/
+            per06to12 = doc.elements[xpath + 'info[3]/rainfallchance/period[2]'].text
+            per12to18 = doc.elements[xpath + 'info[3]/rainfallchance/period[3]'].text
+            per18to24 = doc.elements[xpath + 'info[3]/rainfallchance/period[4]'].text
+
+            if per06to12.to_i >= min_per || per12to18.to_i >= min_per || per18to24.to_i >= min_per
+              push = "明後日？\n雨は生命の営みの一部なのじゃ。\n雨へと変わる空を喜んで送り出せ。\n\n   6 〜12時 #{per06to12}%\n  12〜18時 #{per12to18}%\n  18〜24時 #{per18to24}%\n\n嘆いてはならぬ。寂しがってもならぬ。執着は嫉妬を生み、欲望の影が忍び寄るぞ。"
+            else
+              push = "明後日の天気、かの？\nいまのところは、晴れのようじゃ。\nしかし、未来を見るときには気をつけよ、パダワン。\n喪失への恐れは、ダークサイドへの入り口なのじゃ。"
             end
 
           when /.*(テスト|てすと).*/
