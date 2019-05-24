@@ -50,16 +50,6 @@ class LinebotController < ApplicationController
           when /.*(テスト|てすと).*/
             push = "テストてすと"
 
-
-          else
-            per06to12 = doc.elements[xpath + '/rainfallchance/period[2]'].text
-            per12to18 = doc.elements[xpath + '/rainfallchance/period[3]'].text
-            per18to24 = doc.elements[xpath + '/rainfallchance/period[4]'].text
-
-            if per06to12.to_i >= min_per || per12to18.to_i >= min_per || per18to24.to_i >= min_per
-              push = "今日は傘を持つのじゃ。#{weather}じゃからの"
-            end
-
           end
         end
         message = {
