@@ -29,7 +29,7 @@ class LinebotController < ApplicationController
           url = "https://www.drk7.jp/weather/xml/13.xml"
           xml = open(url).read.toutf8
           doc = REXML::Document.new(xml)
-          xpath = 'weatherforecast/pref/area[4]/info'
+          xpath = 'weatherforecast/pref/area[4]/'
 
           min_per = 20 #最終的には30に変更
 
