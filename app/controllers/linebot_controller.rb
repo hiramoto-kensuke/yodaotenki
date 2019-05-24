@@ -31,7 +31,7 @@ class LinebotController < ApplicationController
           doc = REXML::Document.new(xml)
           xpath = 'weatherforecast/pref/area[4]/'
 
-          min_per = 20 #最終的には30に変更
+          min_per = 0 #最終的には30に変更
 
           case input
             # 「明日」or「あした」というワードが含まれる場合
