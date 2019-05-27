@@ -13,14 +13,20 @@ task :update_feed => :environment do
   url  = "http://www.drk7.jp/weather/xml/13.xml"
   xml  = open( url ).read.toutf8
   doc = REXML::Document.new(xml)
-  xpath = 'weatherforecast/pref/area[4]/info'
-  weather = doc.elements[xpath + '/weather'].text
-  per06to12 = doc.elements[xpath + '/rainfallchance/period[2]l'].text
-  per12to18 = doc.elements[xpath + '/rainfallchance/period[3]l'].text
-  per18to24 = doc.elements[xpath + '/rainfallchance/period[4]l'].text
+  xpath = 'weatherforecast/pref/area[4]/info/rainfallchance/'
+
+  per06to12 = doc.elements[xpath + 'period[2]'].text
+  per12to18 = doc.elements[xpath + 'period[3]'].text
+  per18to24 = doc.elements[xpath + 'period[4]'].text
   min_per = 20
   if per06to12.to_i >= min_per || per12to18.to_i >= min_per || per18to24.to_i >= min_per
-    push = "今日は傘を持つのじゃ。#{weather}じゃからの。"
+    word1 =
+        ["すがすがしい朝じゃの。",
+        "よく眠れたかの。パダワンよ。",
+        "ずいぶんと早起きなんじゃの。"].sample
+    word2 =
+        ["フォースと共にあらんことを。",
+        ""]
   else
     push = "テスト用"
   end

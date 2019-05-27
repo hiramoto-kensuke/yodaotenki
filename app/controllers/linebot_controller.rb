@@ -31,7 +31,7 @@ class LinebotController < ApplicationController
           doc = REXML::Document.new(xml)
           xpath = 'weatherforecast/pref/area[4]/'
 
-          min_per = 20 #最終的には30に変更
+          min_per = 30
 
           case input
             # 「明日」or「あした」というワードが含まれる場合
@@ -57,7 +57,8 @@ class LinebotController < ApplicationController
               push = "明後日の天気、かの？\nいまのところは、晴れるようじゃ。\nしかし、未来を見るときには気をつけよ、パダワン。\n喪失への恐れは、ダークサイドへの入り口なのじゃ。"
             end
 
-
+          when  /.*(URL|映画).*/
+            push = "https://www.amazon.co.jp/%E3%82%B9%E3%82%BF%E3%83%BC%E3%83%BB%E3%82%A6%E3%82%A9%E3%83%BC%E3%82%BA-%E3%82%A8%E3%83%94%E3%82%BD%E3%83%BC%E3%83%891%EF%BC%8F%E3%83%95%E3%82%A1%E3%83%B3%E3%83%88%E3%83%A0%E3%83%BB%E3%83%A1%E3%83%8A%E3%82%B9-%E5%AD%97%E5%B9%95%E7%89%88-%E3%83%AA%E3%83%BC%E3%82%A2%E3%83%A0%E3%83%BB%E3%83%8B%E3%83%BC%E3%82%BD%E3%83%B3/dp/B014KNGEBG/ref=sr_1_3?qid=1558950682&refinements=p_28%3A%E3%82%B9%E3%82%BF%E3%83%BC%E3%83%BB%E3%82%A6%E3%82%A9%E3%83%BC%E3%82%BA&s=instant-video&sr=1-3"
           when /.*(未来).*/
             push = "ふむ、ダークサイドが全てを曇らせておる。未来を読むのは難しい。\nわしに見えるのは明後日までの未来のようじゃ。"
 
@@ -67,6 +68,9 @@ class LinebotController < ApplicationController
                 "わしはルーカスとはなんの関係もないのじゃよ。",
                 "ヨーダではない、ということだけは確かじゃ。"].sample
             push = "#{word}"
+
+          when /.*(episode1|EPISODE1|エピソード1).*/
+            push = ""
 
           when /.*(名言|めいげん).*/
             word =
