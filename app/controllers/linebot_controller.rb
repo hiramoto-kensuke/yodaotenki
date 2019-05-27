@@ -74,8 +74,26 @@ class LinebotController < ApplicationController
                 "失いたくない全てのものを解放するように自分を鍛えるんじゃ",
                 "ダークサイドを覗くときは、向こうが覗き返してこないかどうか気をつけるんじゃ"].sample
             push = "#{word}"
+          else
+            per06to12 = doc.elements[xpath + 'info/rainfallchance/period[2]'].text
+            per12to18 = doc.elements[xpath + 'info/rainfallchance/period[3]'].text
+            per18to24 = doc.elements[xpath + 'info/rainfallchance/period[4]'].text
+            if per06to12.to_i >= min_per || per12to18.to_i >= min_per || per18to24.to_i >= min_per
+              word =
+                  ["フォースを使え、感じるのじゃ。",
+                  "フォースはお前とわしの間にもある。\n雨にも、木にも。至るところにある！",
+                  "雨は生きることの一部じゃ。"].sample
+              push = "今日は雨が降りそうじゃから、傘があったほうが安心じゃな。\n  6 〜12時  #{per06to12}%\n 12〜18時  #{per12to18}%\n 18〜24時  #{per18to24}%\n\n#{word}"
+            else
+              word =
+                  ["雨が降ったらすまんの。",
+                  "修行はもう必要ない。学ぶべきものはすでに身についておる。",
+                  "フォースとともにあらんことを。"].sample
+              push = "今日は雨は振らなそうじゃの。\n#{word}"
+            end
 
-          end
+
+            end
         end
         message = {
             type: 'text',
