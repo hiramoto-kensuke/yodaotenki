@@ -58,7 +58,7 @@ class LinebotController < ApplicationController
             end
 
           when  /.*(URL|映画).*/
-            push = "https://unsplash.com/photos/05804iCnNcQ"
+            image = "https://unsplash.com/photos/05804iCnNcQ"
           when /.*(未来).*/
             push = "ふむ、ダークサイドが全てを曇らせておる。未来を読むのは難しい。\nわしに見えるのは明後日までの未来のようじゃ。"
 
@@ -110,7 +110,9 @@ class LinebotController < ApplicationController
 
         message = {
             type: 'text',
-            text: push
+            text: push,
+            originalContentUrl: image,
+            previewImageUrl: preimage
         }
         client.reply_message(event['replyToken'], message)
 
