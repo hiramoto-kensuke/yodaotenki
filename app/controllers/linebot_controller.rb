@@ -16,7 +16,7 @@ class LinebotController < ApplicationController
       end
     end
     events = client.parse_events_from(body)
-    events.each { |event|
+    events.each {|event|
       case event
         # メッセージが送信された場合の対応（機能①）
       when Line::Bot::Event::Message
@@ -64,15 +64,15 @@ class LinebotController < ApplicationController
           when /.*(名言|めいげん).*/
             word =
                 ["恐れはダークサイドに通じる。\n恐れは怒りに通じ、怒りは憎しみに通じる。\n憎しみは苦しみとなるのじゃ。",
-                "一度ダークサイドに堕ちれば、二度と逃れることはできんのじゃ。",
-                "ジェダイはフォースを身を守るために使うのじゃ、攻撃にではない。",
-                "大きさは問題ではない。\nわしを見ろ、体のサイズで強さを判断するのか？",
-                "やってみるではダメじゃ。\nやるか、さもなければやらないかじゃ。トライなんてものはないんじゃ。",
-                "忍耐強くならないとダメじゃ、若きパダワンよ。",
-                "生徒が聞きたくないからってヨーダが教えるのを止めると思っているか？\nヨーダは先生なんじゃ。\nヨーダは酔っ払いが飲むように、殺し屋が殺すように、教えるんじゃ。",
-                "フォースと共にあらんことを。",
-                "失いたくない全てのものを解放するように自分を鍛えるんじゃ",
-                "ダークサイドを覗くときは、向こうが覗き返してこないかどうか気をつけるんじゃ"].sample
+                 "一度ダークサイドに堕ちれば、二度と逃れることはできんのじゃ。",
+                 "ジェダイはフォースを身を守るために使うのじゃ、攻撃にではない。",
+                 "大きさは問題ではない。\nわしを見ろ、体のサイズで強さを判断するのか？",
+                 "やってみるではダメじゃ。\nやるか、さもなければやらないかじゃ。トライなんてものはないんじゃ。",
+                 "忍耐強くならないとダメじゃ、若きパダワンよ。",
+                 "生徒が聞きたくないからってヨーダが教えるのを止めると思っているか？\nヨーダは先生なんじゃ。\nヨーダは酔っ払いが飲むように、殺し屋が殺すように、教えるんじゃ。",
+                 "フォースと共にあらんことを。",
+                 "失いたくない全てのものを解放するように自分を鍛えるんじゃ",
+                 "ダークサイドを覗くときは、向こうが覗き返してこないかどうか気をつけるんじゃ"].sample
             push = "#{word}"
           else
             per06to12 = doc.elements[xpath + 'info/rainfallchance/period[2]'].text
@@ -81,25 +81,35 @@ class LinebotController < ApplicationController
             if per06to12.to_i >= min_per || per12to18.to_i >= min_per || per18to24.to_i >= min_per
               word =
                   ["フォースを使え、感じるのじゃ。",
-                  "フォースはお前とわしの間にもある。\n雨にも、木にも。至るところにある！",
-                  "雨は生きることの一部じゃ。"].sample
+                   "フォースはお前とわしの間にもある。\n雨にも、木にも。至るところにある！",
+                   "雨は生きることの一部じゃ。"].sample
               push = "今日は雨が降りそうじゃから、傘があったほうが安心じゃな。\n  6 〜12時  #{per06to12}%\n 12〜18時  #{per12to18}%\n 18〜24時  #{per18to24}%\n\n#{word}"
             else
               word =
                   ["雨が降ったらすまんの。",
-                  "修行はもう必要ない。学ぶべきものはすでに身についておる。",
-                  "フォースとともにあらんことを。"].sample
+                   "修行はもう必要ない。学ぶべきものはすでに身についておる。",
+                   "フォースとともにあらんことを。"].sample
               push = "今日は雨は振らなそうじゃの。\n#{word}"
             end
-
-
-            end
+          end
+          #text以外のメッセージへの対応
+        else
+          push = "テキスト以外はフォースをもってしてもわからんな"
         end
+
         message = {
             type: 'text',
             text: push
         }
         client.reply_message(event['replyToken'], message)
+
+      when Line::Bot::Event::Follow
+        line_id = event['source']['userId']
+        User.create(line_id: line_id)
+
+      when Line::Bot::Event::Unfollow
+        line_id = event['source']['userId']
+        User.find_by(line_id: line_id).destroy
       end
     }
     head :ok
