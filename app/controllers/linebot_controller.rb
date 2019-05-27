@@ -59,6 +59,7 @@ class LinebotController < ApplicationController
 
           when  /.*(URL|映画).*/
             image = "https://unsplash.com/photos/05804iCnNcQ"
+            preimage = "https://unsplash.com/photos/05804iCnNcQ"
           when /.*(未来).*/
             push = "ふむ、ダークサイドが全てを曇らせておる。未来を読むのは難しい。\nわしに見えるのは明後日までの未来のようじゃ。"
 
