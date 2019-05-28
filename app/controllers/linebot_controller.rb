@@ -59,7 +59,6 @@ class LinebotController < ApplicationController
             end
 
           when  /.*(URL|映画).*/
-            push =""
             image = "https://raw.githubusercontent.com/hiramoto-kensuke/yodaotenki/master/public/yodajpeg.jpeg"
             preimage = "https://raw.githubusercontent.com/hiramoto-kensuke/yodaotenki/master/public/yodapreview.jpeg"
 
@@ -138,10 +137,11 @@ class LinebotController < ApplicationController
         end
 
         message =[]
-
-        message << {type: 'text', text: push } if push
-        message << {type: 'image', originalContentUrl: image, previewImageUrl: preimage} if image
-
+        if push
+        message << {type: 'text', text: push }
+        else
+        message << {type: 'image', originalContentUrl: image, previewImageUrl: preimage}
+        end
         client.reply_message(event['replyToken'], message)
 
       when Line::Bot::Event::Follow
