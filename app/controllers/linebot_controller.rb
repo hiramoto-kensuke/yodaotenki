@@ -4,7 +4,6 @@ class LinebotController < ApplicationController
   require 'kconv'
   require 'rexml/document'
 
-  message =[]
 
   protect_from_forgery :except => [:callback]
 
@@ -137,6 +136,8 @@ class LinebotController < ApplicationController
         else
           push = "テキスト以外はフォースをもってしてもわからんな"
         end
+
+        message =[]
 
         message << {type: 'text', text: push } if push
         message << {type: 'image', originalContentUrl: image, previewImageUrl: preimage} if image
