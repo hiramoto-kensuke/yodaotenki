@@ -58,7 +58,8 @@ class LinebotController < ApplicationController
             end
 
           when  /.*(URL|映画).*/
-            image_url = "https://raw.githubusercontent.com/hiramoto-kensuke/yodaotenki/master/public/yodajpeg.jpeg"
+            image = "https://raw.githubusercontent.com/hiramoto-kensuke/yodaotenki/master/public/yodajpeg.jpeg"
+            preimage = "https://raw.githubusercontent.com/hiramoto-kensuke/yodaotenki/master/public/yodapreview.jpeg"
 
 
 
@@ -137,8 +138,8 @@ class LinebotController < ApplicationController
         message = [
             {type: 'text', text: push },
             {type: 'image',
-            originalContentUrl: image_url,
-            previewImageUrl: image_url
+            originalContentUrl: image,
+            previewImageUrl: preimage
             }
            ]
         client.reply_message(event['replyToken'], message)
