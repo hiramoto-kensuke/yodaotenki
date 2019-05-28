@@ -58,8 +58,8 @@ class LinebotController < ApplicationController
             end
 
           when  /.*(URL|映画).*/
-            image = "https://drive.google.com/file/d/1HTFe8sWP5WuBqgwx_ZVBQdha5N1s1eVN/view?usp=sharing"
-            preimage = "https://drive.google.com/file/d/1HTFe8sWP5WuBqgwx_ZVBQdha5N1s1eVN/view?usp=sharing"
+            image = "https://drive.google.com/file/d/1-L1FFt_vpQCu-PDck201FCGsDDkasQal/view?usp=sharing"
+            preimage = "https://drive.google.com/file/d/1-L1FFt_vpQCu-PDck201FCGsDDkasQal/view?usp=sharing"
           when /.*(未来).*/
             push = "ふむ、ダークサイドが全てを曇らせておる。未来を読むのは難しい。\nわしに見えるのは明後日までの未来のようじゃ。"
 
