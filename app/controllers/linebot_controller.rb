@@ -58,8 +58,8 @@ class LinebotController < ApplicationController
             end
 
           when  /.*(URL|映画).*/
-            image = "https://github.com/hiramoto-kensuke/yodaotenki/blob/master/public/yodajpeg.jpeg"
-            preimage = "https://github.com/hiramoto-kensuke/yodaotenki/blob/master/public/yodajpeg.jpeg"
+            image_url = "https://github.com/hiramoto-kensuke/yodaotenki/blob/master/public/yodajpeg.jpeg"
+
           when /.*(未来).*/
             push = "ふむ、ダークサイドが全てを曇らせておる。未来を読むのは難しい。\nわしに見えるのは明後日までの未来のようじゃ。"
 
