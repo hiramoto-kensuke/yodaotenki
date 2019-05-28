@@ -136,7 +136,7 @@ class LinebotController < ApplicationController
         end
 
         message = [
-            {type: 'text', text: push },
+            # {type: 'text', text: push },
             {type: 'image',
             originalContentUrl: image,
             previewImageUrl: preimage
