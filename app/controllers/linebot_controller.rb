@@ -138,13 +138,9 @@ class LinebotController < ApplicationController
           push = "テキスト以外はフォースをもってしてもわからんな"
         end
 
-        message = [
-            {type: 'text', text: push },
-            {type: 'image',
-            originalContentUrl: image,
-            previewImageUrl: preimage
-            }
-           ]
+        message << {type: 'text', text: push } if push
+        message << {type: 'image', originalContentUrl: image, previewImageUrl: preimage} if image
+
         client.reply_message(event['replyToken'], message)
 
       when Line::Bot::Event::Follow
