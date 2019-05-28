@@ -58,10 +58,9 @@ class LinebotController < ApplicationController
               push = "明後日の天気、かの？\nいまのところは、晴れるようじゃ。\nしかし、未来を見るときには気をつけよ、パダワン。\n喪失への恐れは、ダークサイドへの入り口なのじゃ。"
             end
 
-          when  /.*(自撮り|じどり).*/
+          when /.*(自撮り|じどり).*/
             image = "https://raw.githubusercontent.com/hiramoto-kensuke/yodaotenki/master/public/yodajpeg.jpeg"
             preimage = "https://raw.githubusercontent.com/hiramoto-kensuke/yodaotenki/master/public/yodapreview.jpeg"
-
 
 
           when /.*(未来).*/
@@ -70,15 +69,15 @@ class LinebotController < ApplicationController
           when /.*(誰|ヨーダ|名前).*/
             word =
                 ["わしが誰かに似ていたとしてもそれは気のせいじゃ。\n真実なんてものはものの見方次第じゃからの。",
-                "わしはルーカスとはなんの関係もないのじゃよ。",
-                "ヨーダではない、ということだけは確かじゃ。"].sample
+                 "わしはルーカスとはなんの関係もないのじゃよ。",
+                 "ヨーダではない、ということだけは確かじゃ。"].sample
             push = "#{word}"
 
           when /.*(おはよう|こんにちは|こんばんは|初めまして|はじめまして).*/
             word =
                 ["礼儀正しいやつじゃの。",
-                "お主にとっていい一日になると良いの。",
-                "元気が良いの、若きパダワンよ。"].sample
+                 "お主にとっていい一日になると良いの。",
+                 "元気が良いの、若きパダワンよ。"].sample
             push = "#{word} \nフォースと共にあらんことを。"
 
           when /.*(かっこいい|格好いい|かわいい|可愛い|おもしろい|面白い|すごい|スゴイ|スゴい|凄い|がんば|頑張).*/
@@ -114,15 +113,6 @@ class LinebotController < ApplicationController
                  "ダークサイドを覗くときは、向こうが覗き返してこないかどうか気をつけるんじゃ"].sample
             push = "#{word}"
 
-          when /.*(EPISODE|エピソード).*/
-            push = "https://www.amazon.co.jp/%E3%82%B9%E3%82%BF%E3%83%BC%E3%83%BB%E3%82%A6%E3%82%A9%E3%83%BC%E3%82%BA-%E3%82%A8%E3%83%94%E3%82%BD%E3%83%BC%E3%83%891%EF%BC%8F%E3%83%95%E3%82%A1%E3%83%B3%E3%83%88%E3%83%A0%E3%83%BB%E3%83%A1%E3%83%8A%E3%82%B9-%E5%AD%97%E5%B9%95%E7%89%88-%E3%83%AA%E3%83%BC%E3%82%A2%E3%83%A0%E3%83%BB%E3%83%8B%E3%83%BC%E3%82%BD%E3%83%B3/dp/B014KNGEBG/ref=sr_1_3?qid=1559039386&refinements=p_28%3A%E3%82%B9%E3%82%BF%E3%83%BC%E3%83%BB%E3%82%A6%E3%82%A9%E3%83%BC%E3%82%BA&s=instant-video&sr=1-3"
-
-
-
-
-
-
-
 
           else
             per06to12 = doc.elements[xpath + 'info/rainfallchance/period[2]'].text
@@ -147,11 +137,11 @@ class LinebotController < ApplicationController
           push = "テキスト以外はフォースをもってしてもわからんな"
         end
 
-        message =[]
+        message = []
         if push
-        message << {type: 'text', text: push }
+          message << {type: 'text', text: push}
         else
-        message << {type: 'image', originalContentUrl: image, previewImageUrl: preimage}
+          message << {type: 'image', originalContentUrl: image, previewImageUrl: preimage}
         end
         client.reply_message(event['replyToken'], message)
 
