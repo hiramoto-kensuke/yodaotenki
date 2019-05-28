@@ -58,7 +58,7 @@ class LinebotController < ApplicationController
               push = "明後日の天気、かの？\nいまのところは、晴れるようじゃ。\nしかし、未来を見るときには気をつけよ、パダワン。\n喪失への恐れは、ダークサイドへの入り口なのじゃ。"
             end
 
-          when  /.*(URL|映画).*/
+          when  /.*(自撮り|じどり).*/
             image = "https://raw.githubusercontent.com/hiramoto-kensuke/yodaotenki/master/public/yodajpeg.jpeg"
             preimage = "https://raw.githubusercontent.com/hiramoto-kensuke/yodaotenki/master/public/yodapreview.jpeg"
 
