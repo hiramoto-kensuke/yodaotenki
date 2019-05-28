@@ -112,7 +112,7 @@ class LinebotController < ApplicationController
                  "失いたくない全てのものを解放するように自分を鍛えるんじゃ",
                  "ダークサイドを覗くときは、向こうが覗き返してこないかどうか気をつけるんじゃ"].sample
             push = "#{word}"
-          when /.*(エピソード).*/
+          when /.*(エピソード|Episode|EPISODE|観たい|見たい|スターウォーズ|スター・ウォーズ).*/
 
           else
             per06to12 = doc.elements[xpath + 'info/rainfallchance/period[2]'].text
