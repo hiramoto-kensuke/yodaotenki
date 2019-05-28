@@ -70,8 +70,12 @@ class LinebotController < ApplicationController
                 "ヨーダではない、ということだけは確かじゃ。"].sample
             push = "#{word}"
 
-          when /.*(episode1|EPISODE1|エピソード1).*/
-            push = ""
+          when /.*(おはよう|こんにちは|こんばんは|初めまして|はじめまして).*/
+            word =
+                ["礼儀正しいやつじゃの。",
+                "お主にとっていい一日になると良いの。",
+                "元気が良いの、若きパダワンよ。"].sample
+            push = "#{word} \nフォースと共にあらんことを。"
 
           when /.*(名言|めいげん).*/
             word =
