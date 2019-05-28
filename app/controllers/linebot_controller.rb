@@ -4,6 +4,8 @@ class LinebotController < ApplicationController
   require 'kconv'
   require 'rexml/document'
 
+  message =[]
+
   protect_from_forgery :except => [:callback]
 
   def callback
@@ -58,6 +60,7 @@ class LinebotController < ApplicationController
             end
 
           when  /.*(URL|映画).*/
+            push =""
             image = "https://raw.githubusercontent.com/hiramoto-kensuke/yodaotenki/master/public/yodajpeg.jpeg"
             preimage = "https://raw.githubusercontent.com/hiramoto-kensuke/yodaotenki/master/public/yodapreview.jpeg"
 
@@ -136,7 +139,7 @@ class LinebotController < ApplicationController
         end
 
         message = [
-            # {type: 'text', text: push },
+            {type: 'text', text: push },
             {type: 'image',
             originalContentUrl: image,
             previewImageUrl: preimage
