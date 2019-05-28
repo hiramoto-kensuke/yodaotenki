@@ -58,8 +58,8 @@ class LinebotController < ApplicationController
             end
 
           when  /.*(URL|映画).*/
-            image = "/Users/hiramoto.kensuke/Downloads/ep6.png"
-            preimage = "/Users/hiramoto.kensuke/Downloads/ep6.png"
+            image = "https://drive.google.com/file/d/1HTFe8sWP5WuBqgwx_ZVBQdha5N1s1eVN/view?usp=sharing"
+            preimage = "https://drive.google.com/file/d/1HTFe8sWP5WuBqgwx_ZVBQdha5N1s1eVN/view?usp=sharing"
           when /.*(未来).*/
             push = "ふむ、ダークサイドが全てを曇らせておる。未来を読むのは難しい。\nわしに見えるのは明後日までの未来のようじゃ。"
 
@@ -95,7 +95,7 @@ class LinebotController < ApplicationController
                   ["フォースを使え、感じるのじゃ。",
                    "フォースはお前とわしの間にもある。\n雨にも、木にも。至るところにある！",
                    "雨は生きることの一部じゃ。"].sample
-              push = "今日は雨が降りそうじゃから、傘があったほうが安心じゃな。\n  6 〜12時  #{per06to12}%\n 12〜18時  #{per12to18}%\n 18〜24時  #{per18to24}%\n\n#{word}"
+              push = "今日は雨が降りそうじゃから、傘があったほうが安心じゃな。\n\n  6 〜12時  #{per06to12}%\n 12〜18時  #{per12to18}%\n 18〜24時  #{per18to24}%\n\n#{word}"
             else
               word =
                   ["雨が降ったらすまんの。",
