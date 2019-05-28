@@ -113,6 +113,17 @@ class LinebotController < ApplicationController
                  "失いたくない全てのものを解放するように自分を鍛えるんじゃ",
                  "ダークサイドを覗くときは、向こうが覗き返してこないかどうか気をつけるんじゃ"].sample
             push = "#{word}"
+
+          when /.*(EPISODE|エピソード).*/
+            push = "https://www.amazon.co.jp/%E3%82%B9%E3%82%BF%E3%83%BC%E3%83%BB%E3%82%A6%E3%82%A9%E3%83%BC%E3%82%BA-%E3%82%A8%E3%83%94%E3%82%BD%E3%83%BC%E3%83%891%EF%BC%8F%E3%83%95%E3%82%A1%E3%83%B3%E3%83%88%E3%83%A0%E3%83%BB%E3%83%A1%E3%83%8A%E3%82%B9-%E5%AD%97%E5%B9%95%E7%89%88-%E3%83%AA%E3%83%BC%E3%82%A2%E3%83%A0%E3%83%BB%E3%83%8B%E3%83%BC%E3%82%BD%E3%83%B3/dp/B014KNGEBG/ref=sr_1_3?qid=1559039386&refinements=p_28%3A%E3%82%B9%E3%82%BF%E3%83%BC%E3%83%BB%E3%82%A6%E3%82%A9%E3%83%BC%E3%82%BA&s=instant-video&sr=1-3"
+
+
+
+
+
+
+
+
           else
             per06to12 = doc.elements[xpath + 'info/rainfallchance/period[2]'].text
             per12to18 = doc.elements[xpath + 'info/rainfallchance/period[3]'].text
