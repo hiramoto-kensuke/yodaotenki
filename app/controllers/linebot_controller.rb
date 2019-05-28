@@ -132,12 +132,13 @@ class LinebotController < ApplicationController
           push = "テキスト以外はフォースをもってしてもわからんな"
         end
 
-        message = {
-            type: 'text',
-            text: push,
-            originalContentUrl: image,
-            previewImageUrl: preimage
-        }
+        message = [
+            {type: 'text', text: push },
+            {type: 'image',
+            originalContentUrl: image_url,
+            previewImageUrl: image_url
+            }
+           ]
         client.reply_message(event['replyToken'], message)
 
       when Line::Bot::Event::Follow
